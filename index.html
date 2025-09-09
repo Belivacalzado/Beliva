@@ -4,21 +4,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Beliva | Tienda de Calzado</title>
-  <link rel="icon" href="Beliva-icon.PNG" type="image/png">
+  <link rel="icon" href="img/Beliva-icon.PNG" type="image/png">
   <style>
     :root {
-      --rosa: #f7d6d0;   /* Rosa pastel principal, tomado del logo */
-      --lavanda: #d8c4f8; /* Lila pastel suave */
-      --menta: #c8ede4;   /* Verde menta pastel */
-      --cielo: #c9e7f5;   /* Azul cielo pastel */
-      --durazno: #fcd8c2; /* Naranja/durazno pastel */
-      --texto: #4a3f45;   /* Gris-marrón suave para buena legibilidad */
+      --rosa: #f7d6d0;
+      --lavanda: #000000;
+      --cielo: #c9e7f5;
+      --durazno: #ffd8c9;
+      --texto: #5a4f4d;;
     }
-
     body {
       margin: 0;
       font-family: 'Segoe UI', Arial, sans-serif;
-      background: var(--gris);
+      background: var(--durazno);
       color: var(--texto);
     }
     header {
@@ -31,7 +29,7 @@
       position: sticky;
       top: 0;
       z-index: 1000;
-      border-bottom: 1px solid var(--azul);
+      border-bottom: 1px solid var(--cielo);
     }
     header img {
       height: 48px;
@@ -49,11 +47,11 @@
       transition: background 0.2s;
     }
     nav a:hover {
-      background: var(--azul);
+      background: var(--cielo);
     }
     .hero {
       height: 55vh;
-      background: url('calzado.png') center/cover no-repeat;
+      background: url('img/calzado.png') center/cover no-repeat;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -85,12 +83,12 @@
       background: var(--rosa);
       border-radius: 50%;
       padding: 8px;
-      box-shadow: 0 2px 8px rgba(179,229,252,0.10); /* Sombra suave opcional */
+      box-shadow: 0 2px 8px rgba(179,229,252,0.10);
     }
     .hero h2 {
       font-size: 36px;
       margin-bottom: 10px;
-      color: var(--lila);
+      color: var(--lavanda);
       font-weight: 700;
     }
     .hero p {
@@ -112,7 +110,7 @@
       display: inline-block;
     }
     .btn:hover {
-      background: var(--lila);
+      background: var(--lavanda);
       color: var(--texto);
     }
     .productos {
@@ -134,7 +132,7 @@
     .card {
       background: #fff;
       border-radius: 18px;
-      border: 1.5px solid var(--azul);
+      border: 1.5px solid var(--cielo);
       overflow: hidden;
       transition: transform 0.2s, border 0.3s;
       padding-bottom: 20px;
@@ -147,13 +145,13 @@
       width: 100%;
       height: 170px;
       object-fit: cover;
-      background: var(--lila);
-      border-bottom: 1.5px solid var(--azul);
+      background: var(--lavanda);
+      border-bottom: 1.5px solid var(--cielo);
     }
     .card h3 {
       margin: 16px 0 6px;
       font-size: 18px;
-      color: var(--lila);
+      color: var(--lavanda);
       font-weight: 600;
     }
     .card p {
@@ -176,7 +174,7 @@
       border-radius: 18px;
     }
     .card .btn:hover {
-      background: var(--lila);
+      background: var(--lavanda);
     }
     .social-footer {
       display: flex;
@@ -196,7 +194,7 @@
       transition: color 0.2s;
     }
     .social-footer a:hover {
-      color: var(--azul);
+      color: var(--cielo);
     }
     .icon {
       width: 24px;
@@ -204,12 +202,12 @@
       display: block;
     }
     footer {
-      background: var(--gris);
+      background: var(--durazno);
       color: var(--texto);
       padding: 32px 10px 22px 10px;
       text-align: center;
       margin-top: 44px;
-      border-top: 1.5px solid var(--azul);
+      border-top: 1.5px solid var(--cielo);
     }
     footer img {
       height: 30px;
@@ -220,7 +218,7 @@
       background: var(--rosa);
       border-radius: 8px;
       padding: 3px 8px;
-      border: 1px solid var(--azul);
+      border: 1px solid var(--cielo);
     }
     footer p {
       margin: 5px 0;
@@ -241,7 +239,6 @@
     }
   </style>
   <script>
-    // Función para WhatsApp con mensaje dinámico
     function comprar(producto) {
       const numero = "4761328415";
       const mensaje = encodeURIComponent("¡Hola! Me interesa comprar el producto: " + producto);
@@ -254,7 +251,7 @@
 
   <!-- Encabezado con logo principal -->
   <header>
-    <img src="Beliva-Logo.PNG" alt="Logo Beliva">
+    <img src="img/Beliva-Logo.PNG" alt="Logo Beliva">
     <nav>
       <a href="#">Inicio</a>
       <a href="#productos">Productos</a>
@@ -265,7 +262,7 @@
   <!-- Sección principal (Hero) con icono V -->
   <section class="hero">
     <div class="hero-content">
-      <img src="Beliva-icon.PNG" alt="Icono Beliva">
+      <img src="img/Beliva-icon.PNG" alt="Icono Beliva">
       <h2>Calzado que define tu estilo</h2>
       <p>Encuentra los mejores modelos de la marca Beliva®  </p>
       <a href="#productos" class="btn">Ver colección</a>
@@ -278,7 +275,7 @@
     <div class="grid">
       <!-- Producto 1 -->
       <div class="card">
-        <img src="calzado.png" alt="Tenis deportivos">
+        <img src="img/calzado.png" alt="Tenis deportivos">
         <h3>Tenis Urban</h3>
         <p>Comodidad y estilo para tu día a día.</p>
         <div class="precio">$299 MXN</div>
@@ -286,7 +283,7 @@
       </div>
       <!-- Producto 2 -->
       <div class="card">
-        <img src="calzado.png" alt="Botines">
+        <img src="img/calzado.png" alt="Botines">
         <h3>Botines Elegance</h3>
         <p>Perfectos para ocasiones especiales.</p>
         <div class="precio">$899 MXN</div>
@@ -294,7 +291,7 @@
       </div>
       <!-- Producto 3 -->
       <div class="card">
-        <img src="calzado.png" alt="Sandalias">
+        <img src="img/calzado.png" alt="Sandalias">
         <h3>Sandalias Breeze</h3>
         <p>Frescura y ligereza para el verano.</p>
         <div class="precio">$999 MXN</div>
@@ -305,7 +302,7 @@
 
   <!-- Footer con logo VÉLA texto y redes sociales -->
   <footer id="contacto">
-    <img src="Beliva-text.PNG" alt="Beliva">
+    <img src="img/Beliva-text.PNG" alt="Beliva">
     <div class="social-footer">
       <!-- WhatsApp -->
       <a href="https://wa.me/524761328415" target="_blank" title="WhatsApp">
