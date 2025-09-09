@@ -13,11 +13,26 @@
       --durazno: #ffd8c9;
       --texto: #5a4f4d;;
     }
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Beliva | Calzado que define tu estilo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    :root {
+      --rosa: #f8bbd0;
+      --lavanda: #ab47bc;
+      --cielo: #b3e5fc;
+      --durazno: #fff3e0;
+      --texto: #222;
+    }
     body {
       margin: 0;
       font-family: 'Segoe UI', Arial, sans-serif;
       background: var(--durazno);
       color: var(--texto);
+      transition: background 0.4s, color 0.4s;
     }
     header {
       background: var(--rosa);
@@ -30,11 +45,17 @@
       top: 0;
       z-index: 1000;
       border-bottom: 1px solid var(--cielo);
+      box-shadow: 0 2px 8px rgba(171,71,188,0.06);
     }
     header img {
       height: 48px;
       margin-right: 24px;
       display: block;
+    }
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
     nav a {
       color: var(--texto);
@@ -48,6 +69,15 @@
     }
     nav a:hover {
       background: var(--cielo);
+    }
+    .nav-toggle {
+      display: none;
+      font-size: 28px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--lavanda);
+      margin-left: 16px;
     }
     .hero {
       height: 55vh;
@@ -75,6 +105,12 @@
       flex-direction: column;
       align-items: center;
       gap: 12px;
+      background: rgba(255,255,255,0.6);
+      backdrop-filter: blur(6px);
+      border-radius: 24px;
+      padding: 28px 32px;
+      box-shadow: 0 6px 18px rgba(171, 71, 188, 0.09);
+      animation: fadeInUp 1s;
     }
     .hero-content img {
       height: 72px;
@@ -86,10 +122,12 @@
       box-shadow: 0 2px 8px rgba(179,229,252,0.10);
     }
     .hero h2 {
-      font-size: 36px;
+      font-size: clamp(22px, 4vw, 36px);
       margin-bottom: 10px;
       color: var(--lavanda);
       font-weight: 700;
+      letter-spacing: 0.5px;
+      text-shadow: 0 2px 8px rgba(171,71,188,0.07);
     }
     .hero p {
       font-size: 18px;
@@ -98,24 +136,28 @@
     .btn {
       background: var(--rosa);
       color: var(--texto);
-      padding: 10px 24px;
+      padding: 12px 32px;
       border: none;
       border-radius: 20px;
-      font-size: 15px;
+      font-size: 16px;
       font-weight: 600;
       cursor: pointer;
       text-decoration: none;
-      transition: background 0.2s;
+      transition: background 0.2s, transform 0.2s;
       box-shadow: none;
       display: inline-block;
+      margin-top: 10px;
+      letter-spacing: 0.3px;
     }
     .btn:hover {
       background: var(--lavanda);
       color: var(--texto);
+      transform: scale(1.08);
     }
     .productos {
       padding: 44px 10px 28px 10px;
       text-align: center;
+      animation: fadeInUp 1.2s;
     }
     .productos h2 {
       font-size: 26px;
@@ -134,12 +176,16 @@
       border-radius: 18px;
       border: 1.5px solid var(--cielo);
       overflow: hidden;
-      transition: transform 0.2s, border 0.3s;
+      transition: transform 0.2s, border 0.3s, box-shadow 0.3s;
       padding-bottom: 20px;
+      box-shadow: 0 2px 12px rgba(171, 71, 188, 0.07);
+      animation: fadeInUp 0.8s;
+      position: relative;
     }
     .card:hover {
-      transform: translateY(-3px) scale(1.01);
+      transform: translateY(-5px) scale(1.04);
       border-color: var(--rosa);
+      box-shadow: 0 6px 20px rgba(171, 71, 188, 0.17);
     }
     .card img {
       width: 100%;
@@ -172,9 +218,32 @@
       font-size: 14px;
       padding: 8px 18px;
       border-radius: 18px;
+      transition: background 0.2s, transform 0.2s;
     }
     .card .btn:hover {
       background: var(--lavanda);
+      transform: scale(1.08);
+    }
+    .tooltip {
+      visibility: hidden;
+      background: var(--lavanda);
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 4px 8px;
+      position: absolute;
+      z-index: 1;
+      bottom: 44px;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0;
+      transition: opacity 0.2s;
+      font-size: 13px;
+      pointer-events: none;
+    }
+    .card:hover .tooltip {
+      visibility: visible;
+      opacity: 1;
     }
     .social-footer {
       display: flex;
@@ -192,9 +261,25 @@
       font-size: 16px;
       gap: 6px;
       transition: color 0.2s;
+      position: relative;
     }
     .social-footer a:hover {
       color: var(--cielo);
+    }
+    .social-footer a[title]:hover::after {
+      content: attr(title);
+      position: absolute;
+      bottom: -28px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--lavanda);
+      color: #fff;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 12px;
+      opacity: 0.95;
+      white-space: nowrap;
+      z-index: 10;
     }
     .icon {
       width: 24px;
@@ -230,12 +315,73 @@
       text-decoration: none;
       font-weight: 600;
     }
+
+    /* Scroll to top button */
+    #scrollTopBtn {
+      display: none;
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      z-index: 100;
+      background: var(--lavanda);
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      font-size: 24px;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(171,71,188,0.13);
+      transition: background 0.2s, transform 0.2s;
+    }
+    #scrollTopBtn:hover {
+      background: var(--rosa);
+      color: var(--texto);
+      transform: scale(1.09);
+    }
+
+    @media (max-width: 900px) {
+      .hero-content {
+        padding: 18px 10px;
+      }
+      .grid {
+        padding: 0 5px;
+      }
+    }
     @media (max-width: 600px) {
       .hero h2 { font-size: 22px; }
       .productos h2 { font-size: 18px; }
-      .grid { padding: 0 5px; }
+      .grid { padding: 0 2px; }
       .hero-content img { height: 48px; }
       .social-footer { gap: 10px; }
+      nav {
+        display: none;
+        flex-direction: column;
+        gap: 2px;
+        position: absolute;
+        background: var(--rosa);
+        right: 20px;
+        top: 70px;
+        border-radius: 10px;
+        box-shadow: 0 4px 16px rgba(171,71,188,0.11);
+        padding: 10px;
+        z-index: 2000;
+      }
+      nav.active {
+        display: flex;
+      }
+      .nav-toggle {
+        display: block;
+      }
+      header {
+        flex-direction: row;
+        padding: 14px 10px;
+      }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px);}
+      to { opacity: 1; transform: translateY(0);}
     }
   </style>
   <script>
@@ -245,10 +391,38 @@
       window.open(`https://wa.me/52${numero}?text=${mensaje}`, "_blank");
       return false;
     }
+
+    // Navbar toggle para móviles
+    document.addEventListener('DOMContentLoaded', function () {
+      const navToggle = document.querySelector('.nav-toggle');
+      const nav = document.querySelector('nav');
+      navToggle && navToggle.addEventListener('click', () => {
+        nav.classList.toggle('active');
+      });
+      // Cierra el menú al dar click fuera
+      document.addEventListener('click', e => {
+        if (!nav.contains(e.target) && !navToggle.contains(e.target)) {
+          nav.classList.remove('active');
+        }
+      });
+    });
+
+    // Scroll to top button
+    window.onscroll = function() {scrollFunction()};
+    function scrollFunction() {
+      const btn = document.getElementById("scrollTopBtn");
+      if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+        btn.style.display = "block";
+      } else {
+        btn.style.display = "none";
+      }
+    }
+    function scrollToTop() {
+      window.scrollTo({top: 0, behavior: 'smooth'});
+    }
   </script>
 </head>
 <body>
-
   <!-- Encabezado con logo principal -->
   <header>
     <img src="img/Beliva-Logo.png" alt="Logo Beliva">
@@ -257,6 +431,7 @@
       <a href="#productos">Productos</a>
       <a href="#contacto">Contacto</a>
     </nav>
+    <button class="nav-toggle" aria-label="Abrir menú">☰</button>
   </header>
 
   <!-- Sección principal (Hero) con icono V -->
@@ -264,7 +439,7 @@
     <div class="hero-content">
       <img src="img/Beliva-icon.png" alt="Icono Beliva">
       <h2>Calzado que define tu estilo</h2>
-      <p>Encuentra los mejores modelos de la marca Beliva®  </p>
+      <p>Encuentra los mejores modelos de la marca Beliva®</p>
       <a href="#productos" class="btn">Ver colección</a>
     </div>
   </section>
@@ -275,37 +450,43 @@
     <div class="grid">
       <!-- Producto 1 -->
       <div class="card">
-        <img src="img/calzado.png" alt="Tenis deportivos">
+        <img src="img/calzado.png" alt="Tenis deportivos" onerror="this.src='img/no-image.png';">
         <h3>Tenis Urban</h3>
         <p>Comodidad y estilo para tu día a día.</p>
         <div class="precio">$299 MXN</div>
         <a href="#" class="btn" onclick="return comprar('Tenis Urban');">Comprar</a>
+        <span class="tooltip">¡Compra por WhatsApp!</span>
       </div>
       <!-- Producto 2 -->
       <div class="card">
-        <img src="img/calzado.png" alt="Botines">
+        <img src="img/calzado.png" alt="Botines" onerror="this.src='img/no-image.png';">
         <h3>Botines Elegance</h3>
         <p>Perfectos para ocasiones especiales.</p>
         <div class="precio">$899 MXN</div>
         <a href="#" class="btn" onclick="return comprar('Botines Elegance');">Comprar</a>
+        <span class="tooltip">¡Compra por WhatsApp!</span>
       </div>
       <!-- Producto 3 -->
       <div class="card">
-        <img src="img/calzado.png" alt="Sandalias">
+        <img src="img/calzado.png" alt="Sandalias" onerror="this.src='img/no-image.png';">
         <h3>Sandalias Breeze</h3>
         <p>Frescura y ligereza para el verano.</p>
         <div class="precio">$999 MXN</div>
         <a href="#" class="btn" onclick="return comprar('Sandalias Breeze');">Comprar</a>
+        <span class="tooltip">¡Compra por WhatsApp!</span>
       </div>
     </div>
   </section>
+
+  <!-- Scroll to top button -->
+  <button id="scrollTopBtn" onclick="scrollToTop()" title="Volver arriba">▲</button>
 
   <!-- Footer con logo VÉLA texto y redes sociales -->
   <footer id="contacto">
     <img src="img/Beliva-text.png" alt="Beliva">
     <div class="social-footer">
       <!-- WhatsApp -->
-      <a href="https://wa.me/524761328415" target="_blank" title="WhatsApp">
+      <a href="https://wa.me/524761328415" target="_blank" title="Chatea en WhatsApp">
         <svg class="icon" viewBox="0 0 32 32" fill="none">
           <circle cx="16" cy="16" r="16" fill="#25D366"/>
           <path d="M22.2 18.4c-.3-.2-1.6-.8-1.8-.9-.2-.1-.4-.2-.6.2-.2.4-.7.9-.9 1.1-.2.2-.4.2-.7.1-.3-.1-1.3-.5-2.5-1.4-.9-.8-1.5-1.7-1.7-1.9-.2-.2-.1-.4.1-.5.2-.2.4-.5.6-.8.2-.2.2-.4 0-.6-.1-.2-.6-1.4-.8-1.9-.2-.5-.4-.4-.6-.4-.2 0-.4 0-.6 0-.2.1-.5.2-.7.5-.2.3-.7.8-.7 2 0 1.2.8 2.3 1 2.5.2.2 2 3.2 4.9 4.4 2.9 1.2 3.2.8 3.8.7.5-.1 1.6-1.1 1.9-2.1.2-1-.1-1.2-.3-1.3z" fill="#fff"/>
@@ -313,7 +494,7 @@
         WhatsApp
       </a>
       <!-- Instagram -->
-      <a href="https://instagram.com/" target="_blank" title="Instagram">
+      <a href="https://instagram.com/" target="_blank" title="Síguenos en Instagram">
         <svg class="icon" viewBox="0 0 32 32" fill="none">
           <circle cx="16" cy="16" r="16" fill="#E1306C"/>
           <rect x="10" y="10" width="12" height="12" rx="4" fill="#fff"/>
@@ -327,8 +508,8 @@
     <p>📧 Contacto: <a class="email" href="mailto:Belivacalzado@gmail.com">Belivacalzado@gmail.com</a></p>
     <p>📍 Ubicación: Purisima del Rincón, Gto, MX</p>
   </footer>
-
 </body>
 </html>
+
 
 
